@@ -1,0 +1,539 @@
+
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>GCP Quickstart</title>
+    <link rel="canonical" href="http://localhost:8000/index.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script type="application/ld+json">
+      {"@context":"http://schema.org","@type":"NewsArticle","headline":"An Open Quickstart Guide to Google Cloud Platform","datePublished":"2016-12-27T14:50:57.69240185-08:00","iamge":["http://www.averesystems.com/cmsFiles/relatedImages/logo_lockup_cloud_platform_icon_vertical.png"]}
+    </script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    
+<style amp-custom>
+
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  color: #212121;
+  background: rgba(51, 51, 51, 0.05);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5 {
+  padding: 0;
+  margin: 0;
+}
+
+.site-content {
+  background-color: #fff;
+}
+
+.site-width {
+  max-width: 1024px;
+  min-width: 230px;
+  min-height: 100vh;
+  overflow: auto;
+  margin: 0 auto;
+
+}
+
+ 
+section.content {
+  padding: 15px;
+}
+
+ 
+header {
+  padding: 15px;
+  font-size: 1.1em;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+header .title {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 15px 0;
+  font-size: 2em;
+  font-weight: 100;
+}
+
+header .title .text {
+  position: relative;
+  display: inline;
+  padding-left: 6px;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+header .title .menu {
+  border: 1px solid #fff;
+  border-radius: 2px;
+  background: transparent;
+  color: #fff;
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  clear: both;
+  display: inline-block;
+  font-size: 1em;
+}
+
+header ul li {
+  float: left;
+}
+
+header ul li:after {
+  content: "/";
+  color: #BBDEFB;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+}
+
+header ul li:last-child:after {
+  content: none;
+  padding: 0;
+}
+
+header ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+
+
+ 
+amp-sidebar {
+  padding: 15px;
+}
+
+amp-sidebar .close {
+  background: transparent;
+  border: 0;
+  font-size: 35px;
+  font-weight: 200;
+  line-height: 0.6;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 0 5px 1px;
+  margin: 5px 10px 0 0;
+}
+
+amp-sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+}
+
+amp-sidebar a {
+  text-decoration: none;
+  color: #212121;
+}
+
+ 
+amp-sidebar > ul > li {
+  font-size: 0.9rem;
+  margin: 3px;
+  padding: 4px;
+}
+
+ 
+amp-sidebar > ul > li > ul > li {
+  margin: 15px 7px 7px 7px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+ 
+amp-sidebar > ul > li > ul > li > ul > li {
+  margin: 10px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+</style>
+
+  </head>
+  <body>
+    <div class="site-content site-width">
+      
+<header role="banner">
+  <div class="title">
+    <button class="menu" on="tap:sidebar.toggle">menu</button>
+    <h1 class="text">GCP Quickstarts</h1>
+  </div>
+  <nav>
+    <ul>
+      
+        
+          <li><a href="http://localhost:8000/lessons/Compute.html">Compute</a></li>
+        
+      
+        
+          <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases.html">Storage and Databases</a></li>
+        
+      
+        
+          <li><a href="http://localhost:8000/lessons/Machine%20Learning.html">Machine Learning</a></li>
+        
+      
+        
+          <li><a href="http://localhost:8000/lessons/Administration.html">Administration</a></li>
+        
+      
+    </ul>
+  </nav>
+</header>
+
+
+      <section class="content" role="main">
+        
+    <div>
+      <amp-img
+        width="917"
+        height="318px"
+        alt="cloud-logo"
+        layout="responsive"
+        src="/img/gcp.png"></app-img>
+    </div>
+
+    <h3>Get started with GCP</h3>
+    <p>
+      This is an open quickstart guide to Google Cloud Platform.
+      All the learnings contained on this webpage are 100% open and liscensed
+      under the gplv3. If you'd like to fix any typos or suggest an edit,
+      you can file an issue on <a href="example.com">github</a>, or
+      comment on the relavent google doc. At the top left of every quickstart
+      you'll see a button linking to a google doc. Simply add a comment on
+      the relavent content in the google doc, and we'll be sure to address
+      your issue.
+    </p>
+
+    <h3>Why an Open Guide?</h3>
+    <p>
+      Closed documentation fails to iterate and keep itself up to date. The
+      hope is that by being open we can foster a relationship with the GCP
+      community to make the best documents possible, through iteration. The
+      reason for choosing the GPLv3 is that we should all benefit by any improvements
+      made to this documentation.
+    </p>
+
+    <h3>How is this different than cloud.google.com?</h3>
+    <p>
+      All documentation on this page serves to act as introduction material to
+      Google Cloud Services. It aims to get you from nothing to having basic
+      services deployed. All the material assumes that the end user has
+      a basic understanding of the command line, and generic linux knowledge.
+    </p>
+
+    <h3>How can I Contribute</h3>
+    <p>
+      If you'd like to add content or become a major contributor simply post an
+      issue to the <a href="example.com">github</a> repo. Be sure to include
+      your Google Cloud subject
+      matter expertise.
+    </p>
+    
+      </section>
+    </div>
+    
+<amp-sidebar id="sidebar" layout="nodisplay" side="left">
+  <button class="close" role="button" on="tap:sidebar.close">×</button>
+  <ul>
+    <li><a href="/">Home</a></li>
+    
+    <li>
+      <a href="http://localhost:8000/lessons/Compute.html">Compute</a>
+      <ul>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Compute.html#GCE">
+            Compute Engine
+            
+              (GCE)
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Compute%20Engine/Launching%20a%20VM.html">Launching a VM</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Compute%20Engine/Instance%20Groups.html">Instance Groups</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Compute%20Engine/Load%20Balancing.html">Load Balancing</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Compute%20Engine/Persistant%20Disk.html">Persistant Disk</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Compute%20Engine/Preemtible%20VMs.html">Preemtible VMs</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Compute%20Engine/Networking%20and%20Security.html">Networking and Security</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Compute%20Engine/Monitoring.html">Monitoring</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Compute.html#GAE">
+            Container Engine
+            
+              (GAE)
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Container%20Engine/What%20is%20Kubernetes.html">What is Kubernetes</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Container%20Engine/Launching%20a%20Service.html">Launching a Service</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Container%20Engine/Using%20Secrets%20Https%20&amp;%20Service%20Accounts.html">Using Secrets Https &amp; Service Accounts</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Container%20Engine/Managing%20a%20Cluster.html">Managing a Cluster</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/Container%20Engine/Monitoring.html">Monitoring</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Compute.html#GAE">
+            App Engine
+            
+              (GAE)
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/App%20Engine/What%20is%20AppEngine.html">What is AppEngine</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/App%20Engine/Launching%20an%20Application.html">Launching an Application</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Compute/App%20Engine/Flex%20vs%20Standard%20Environment.html">Flex vs Standard Environment</a></li>
+          
+          </ul>
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li>
+      <a href="http://localhost:8000/lessons/Storage%20and%20Databases.html">Storage and Databases</a>
+      <ul>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Storage%20and%20Databases.html#Datastore">
+            Datastore
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Datastore/Overview%20of%20NoSQL.html">Overview of NoSQL</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Datastore/Datastore%20Quickstart.html">Datastore Quickstart</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Datastore/Eventual%20Consistency.html">Eventual Consistency</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Storage%20and%20Databases.html#BT">
+            BigTable
+            
+              (BT)
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigTable/When%20to%20use%20BigTable.html">When to use BigTable</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigTable/Performance%20Overview.html">Performance Overview</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigTable/Quickstart.html">Quickstart</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Storage%20and%20Databases.html#BQ">
+            BigQuery
+            
+              (BQ)
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigQuery/When%20to%20use%20BigQuery.html">When to use BigQuery</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigQuery/Comparison%20of%20Competition.html">Comparison of Competition</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigQuery/Best%20Practices.html">Best Practices</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigQuery/Visualizing%20with%20Data%20Studio%20360.html">Visualizing with Data Studio 360</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/BigQuery/Loading%20Data.html">Loading Data</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Storage%20and%20Databases.html#DataProc">
+            DataProc
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/DataProc/What%20is%20Dataproc.html">What is Dataproc</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/DataProc/Best%20Practices.html">Best Practices</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Storage%20and%20Databases.html#GCS">
+            Cloud Storage
+            
+              (GCS)
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Cloud%20Storage/Different%20Tiers%20of%20Storage.html">Different Tiers of Storage</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Cloud%20Storage/Performance.html">Performance</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Cloud%20Storage/Ways%20to%20Access%20Data.html">Ways to Access Data</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Storage%20and%20Databases.html#Pubsub">
+            Pubsub
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Pubsub/Benefits%20of%20a%20Messaging%20Service.html">Benefits of a Messaging Service</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Pubsub/Push%20vs%20Pulling%20Messages.html">Push vs Pulling Messages</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Storage%20and%20Databases/Pubsub/Topics%20&amp;%20Subscriptions.html">Topics &amp; Subscriptions</a></li>
+          
+          </ul>
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li>
+      <a href="http://localhost:8000/lessons/Machine%20Learning.html">Machine Learning</a>
+      <ul>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Machine%20Learning.html#ml">
+            Cloud ML
+            
+              (ml)
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Machine%20Learning/Cloud%20ML/Overview%20of%20Cloud%20ML.html">Overview of Cloud ML</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Machine%20Learning.html#Machine%20Learning%20APIs">
+            Machine Learning APIs
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Machine%20Learning/Machine%20Learning%20APIs/Jobs%20API.html">Jobs API</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Machine%20Learning/Machine%20Learning%20APIs/Natural%20Language%20API.html">Natural Language API</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Machine%20Learning/Machine%20Learning%20APIs/Speech%20API.html">Speech API</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Machine%20Learning/Machine%20Learning%20APIs/Translation%20API.html">Translation API</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Machine%20Learning/Machine%20Learning%20APIs/Vision%20API.html">Vision API</a></li>
+          
+          </ul>
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li>
+      <a href="http://localhost:8000/lessons/Administration.html">Administration</a>
+      <ul>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Administration.html#Security">
+            Security
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Administration/Security/Identity%20&amp;%20Access%20Management%20%28IAM%29.html">Identity &amp; Access Management (IAM)</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Administration/Security/Security%20Scanner.html">Security Scanner</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Administration/Security/Virtual%20Private%20Networking%20%28VPN%29.html">Virtual Private Networking (VPN)</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Administration/Security/Firewalls.html">Firewalls</a></li>
+          
+          </ul>
+        </li>
+        
+        <li>
+          <a href="http://localhost:8000/lessons/Administration.html#Management">
+            Management
+            
+          </a>
+          <ul>
+          
+            <li><a href="http://localhost:8000/lessons/Administration/Management/Deployment%20Manager.html">Deployment Manager</a></li>
+          
+            <li><a href="http://localhost:8000/lessons/Administration/Management/Cloud%20Shell.html">Cloud Shell</a></li>
+          
+          </ul>
+        </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+</amp-sidebar>
+
+  </body>
+</html>

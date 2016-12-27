@@ -1,0 +1,31 @@
+
+{{ define "side-bar" }}
+<amp-sidebar id="sidebar" layout="nodisplay" side="left">
+  <button class="close" role="button" on="tap:sidebar.close">×</button>
+  <ul>
+    <li><a href="/">Home</a></li>
+    {{ range $grouping := . }}
+    <li>
+      <a href="{{$grouping.URL}}">{{$grouping.Name}}</a>
+      <ul>
+        {{ range $product := $grouping.Products }}
+        <li>
+          <a href="{{$grouping.URL}}#{{$product.ID}}">
+            {{$product.Name}}
+            {{ if $product.Acronym }}
+              ({{$product.Acronym}})
+            {{end}}
+          </a>
+          <ul>
+          {{ range $section := $product.Sections }}
+            <li><a href="{{$section.URL}}">{{$section.Name}}</a></li>
+          {{ end }}
+          </ul>
+        </li>
+        {{ end }}
+      </ul>
+    </li>
+    {{ end }}
+  </ul>
+</amp-sidebar>
+{{ end }}

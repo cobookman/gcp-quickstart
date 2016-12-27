@@ -59,14 +59,14 @@
       }
 
       /* Header Styling */
-      header {
+      header .content {
         padding: 15px;
         font-size: 1.1em;
         background-color: #2196F3;
         color: #fff;
       }
 
-      header .title {
+      header .content .title {
         display: inline-block;
         position: relative;
         width: 100%;
@@ -76,7 +76,7 @@
         font-weight: 100;
       }
 
-      header .title .text {
+      header .content .title .text {
         position: relative;
         display: inline;
         padding-left: 6px;
@@ -84,7 +84,7 @@
         font-weight: 200;
       }
 
-      header .title .menu {
+      header .content .title .menu {
         border: 1px solid #fff;
         border-radius: 2px;
         background: transparent;
@@ -92,7 +92,7 @@
         font-size: 0.4em;
         vertical-align: middle;
       }
-      header ul {
+      header .content ul {
         margin: 0;
         padding: 0;
         list-style: none;
@@ -101,23 +101,23 @@
         font-size: 1em;
       }
 
-      header ul li {
+      header .content ul li {
         float: left;
       }
 
-      header ul li:after {
+      header .content ul li:after {
         content: "/";
         color: #BBDEFB;
         padding-left: 0.4em;
         padding-right: 0.4em;
       }
 
-      header ul li:last-child:after {
+      header .content ul li:last-child:after {
         content: none;
         padding: 0;
       }
 
-      header ul li a {
+      header .content ul li a {
         color: white;
         text-decoration: none;
       }
@@ -184,18 +184,139 @@
   <body>
     <div class="site-content site-width">
       <header role="banner">
-        <div class="title">
-          <button class="menu" on="tap:sidebar.toggle">menu</button>
-          <h1 class="text">GCP Quickstarts</h1>
+        <div class="content">
+          <div class="title">
+            <button class="menu" on="tap:sidebar.toggle">menu</button>
+            <h1 class="text">GCP Quickstarts</h1>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="/compute">Compute</a></li>
+              <li><a href="/storage_db">Storage and Databases</a></li>
+              <li><a href="/ml">Machine Learning</a></li>
+              <li><a href="/admininistrator">Administration</a></li>
+            </ul>
+          </nav>
         </div>
-        <nav>
+        <amp-sidebar id="sidebar" layout="nodisplay" side="left">
+          <button class="close" role="button" on="tap:sidebar.close">×</button>
           <ul>
-            <li><a href="/compute">Compute</a></li>
-            <li><a href="/storage_db">Storage and Databases</a></li>
-            <li><a href="/ml">Machine Learning</a></li>
-            <li><a href="/admininistrator">Administration</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/compute">Compute</a>
+              <ul>
+                <li><a href="/gce">Compute Engine</a>
+                  <ul>
+                    <li>Launching a VM</li>
+                    <li>Instance Groups</li>
+                    <li>Load Balancing</li>
+                    <li>Persistant Disk</li>
+                    <li>Premtible VMs</li>
+                    <li>Networking and Security</li>
+                    <li>Monitoring</li>
+                  </ul>
+                </li>
+                <li><a href="/gke">Container Engine</a>
+                  <ul>
+                    <li>What is Kubernetes</li>
+                    <li>Launching a Service</li>
+                    <li>Using Secrets for Https</li>
+                    <li>Managing a cluster</li>
+                    <li>Monitoring</li>
+                  </ul>
+                </li>
+                <li><a href="/appeng">App Engine</a>
+                  <ul>
+                    <li>What is AppEngine</li>
+                    <li>Launching an application</li>
+                    <li>Flex vs Standard Environment</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="/storage_db">Storage and Databases</a>
+              <ul>
+                <li><a href="/datastore">Datastore</a>
+                  <ul>
+                    <li>Overview of NoSQL</li>
+                    <li>Datastore Quickstart</li>
+                    <li>Eventual Consistency</li>
+                  </ul>
+                </li>
+                <li><a href="/bigtable">BigTable</a>
+                  <ul>
+                    <li>When to use BigTable</li>
+                    <li>Performance Overview</li>
+                    <li>Quickstart</li>
+                  </ul>
+                </li>
+                <li><a href="/bigquery">BigQuery</a>
+                  <ul>
+                    <li>When to use BigQuery</li>
+                    <li>Comparison of Competition</li>
+                    <li>Best practices for warehousing data</li>
+                    <li>Visualizing Data with Data Studio 360</li>
+                    <li>Streaming Inserts</li>
+                    <li>Loading in Data</li>
+                  </ul>
+                </li>
+                <li><a href="/dataproc">DataProc</a>
+                  <ul>
+                    <li>What is Dataproc</li>
+                    <li>Best Practices</li>
+                  </ul>
+                </li>
+                <li><a href="/storage">Cloud Storage</a>
+                  <ul>
+                    <li>Different Tiers of Storage</li>
+                    <li>Performance</li>
+                    <li>Ways to Access Data</li>
+                  </ul>
+                </li>
+                <li><a href="/pubsub">Pub/Sub</a>
+                  <ul>
+                    <li>Benefits of a Messaging Service</li>
+                    <li>Push vs Pulling messages</li>
+                    <li>Topics &amp; Subscriptions</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="/ml">Machine Learning</a>
+              <ul>
+                <li>Managed APIs
+                  <ul>
+                    <li>Jobs API</li>
+                    <li>Natural Language API</li>
+                    <li>Speech API</li>
+                    <li>Translation API</li>
+                    <li>Vision API</li>
+                  </ul>
+                </li>
+                <li>Unmanaged
+                  <ul>
+                    <li>Cloud Machine Learning</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="/administration">Administration</a>
+              <ul>
+                <li>Security
+                  <ul>
+                    <li>Identity &amp; Access Magement (IAM)</li>
+                    <li>Security Scanner</li>
+                  </ul>
+                </li>
+                <li>Management
+                  <ul>
+                    <li>Deployment Manager</li>
+                    <li>Cloud Shell</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
           </ul>
-        </nav>
+        </amp-sidebar>
       </header>
       <section class="content" role="main">
         <div>
@@ -245,124 +366,5 @@
         </p>
       </section>
     </div>
-    <amp-sidebar id="sidebar" layout="nodisplay" side="left">
-      <button class="close" role="button" on="tap:sidebar.close">×</button>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/compute">Compute</a>
-          <ul>
-            <li><a href="/gce">Compute Engine</a>
-              <ul>
-                <li>Launching a VM</li>
-                <li>Instance Groups</li>
-                <li>Load Balancing</li>
-                <li>Persistant Disk</li>
-                <li>Premtible VMs</li>
-                <li>Networking and Security</li>
-                <li>Monitoring</li>
-              </ul>
-            </li>
-            <li><a href="/gke">Container Engine</a>
-              <ul>
-                <li>What is Kubernetes</li>
-                <li>Launching a Service</li>
-                <li>Using Secrets for Https</li>
-                <li>Managing a cluster</li>
-                <li>Monitoring</li>
-              </ul>
-            </li>
-            <li><a href="/appeng">App Engine</a>
-              <ul>
-                <li>What is AppEngine</li>
-                <li>Launching an application</li>
-                <li>Flex vs Standard Environment</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="/storage_db">Storage and Databases</a>
-          <ul>
-            <li><a href="/datastore">Datastore</a>
-              <ul>
-                <li>Overview of NoSQL</li>
-                <li>Datastore Quickstart</li>
-                <li>Eventual Consistency</li>
-              </ul>
-            </li>
-            <li><a href="/bigtable">BigTable</a>
-              <ul>
-                <li>When to use BigTable</li>
-                <li>Performance Overview</li>
-                <li>Quickstart</li>
-              </ul>
-            </li>
-            <li><a href="/bigquery">BigQuery</a>
-              <ul>
-                <li>When to use BigQuery</li>
-                <li>Comparison of Competition</li>
-                <li>Best practices for warehousing data</li>
-                <li>Visualizing Data with Data Studio 360</li>
-                <li>Streaming Inserts</li>
-                <li>Loading in Data</li>
-              </ul>
-            </li>
-            <li><a href="/dataproc">DataProc</a>
-              <ul>
-                <li>What is Dataproc</li>
-                <li>Best Practices</li>
-              </ul>
-            </li>
-            <li><a href="/storage">Cloud Storage</a>
-              <ul>
-                <li>Different Tiers of Storage</li>
-                <li>Performance</li>
-                <li>Ways to Access Data</li>
-              </ul>
-            </li>
-            <li><a href="/pubsub">Pub/Sub</a>
-              <ul>
-                <li>Benefits of a Messaging Service</li>
-                <li>Push vs Pulling messages</li>
-                <li>Topics &amp; Subscriptions</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="/ml">Machine Learning</a>
-          <ul>
-            <li>Managed APIs
-              <ul>
-                <li>Jobs API</li>
-                <li>Natural Language API</li>
-                <li>Speech API</li>
-                <li>Translation API</li>
-                <li>Vision API</li>
-              </ul>
-            </li>
-            <li>Unmanaged
-              <ul>
-                <li>Cloud Machine Learning</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="/administration">Administration</a>
-          <ul>
-            <li>Security
-              <ul>
-                <li>Identity &amp; Access Magement (IAM)</li>
-                <li>Security Scanner</li>
-              </ul>
-            </li>
-            <li>Management
-              <ul>
-                <li>Deployment Manager</li>
-                <li>Cloud Shell</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </amp-sidebar>
   </body>
 </html>

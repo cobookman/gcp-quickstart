@@ -1,0 +1,17 @@
+{{ define "header" }}
+<header role="banner">
+  <div class="title">
+    <button class="menu" on="tap:sidebar.toggle">menu</button>
+    <h1 class="text">GCP Quickstarts</h1>
+  </div>
+  <nav>
+    <ul>
+      {{ range $grouping := . }}
+        {{ if $grouping.LinkInHeader }}
+          <li><a href="{{$grouping.URL}}">{{$grouping.Name}}</a></li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </nav>
+</header>
+{{ end }}

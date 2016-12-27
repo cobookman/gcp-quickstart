@@ -1,0 +1,368 @@
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>GCP Quickstarts</title>
+    <link rel="canonical" href="http://localhost:8000/index.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "Open-source framework for publishing content",
+        "datePublished": "2015-10-07T12:02:41Z",
+        "image": [
+          "logo.jpg"
+        ]
+      }
+    </script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style amp-custom>
+      body, html {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        font-weight: 200;
+        font-size: 14px;
+        color: #212121;
+        background: rgba(51, 51, 51, 0.05);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5em;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      h1, h2, h3, h4, h5 {
+        padding: 0;
+        margin: 0;
+      }
+
+      .site-content {
+        background-color: #fff;
+      }
+      .site-width {
+        max-width: 1024px;
+        min-width: 230px;
+        min-height: 100vh;
+        overflow: auto;
+        margin: 0 auto;
+
+      }
+
+      /* Header Styling */
+      header {
+        padding: 15px;
+        font-size: 1.1em;
+        background-color: #2196F3;
+        color: #fff;
+      }
+
+      header .title {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 15px 0;
+        font-size: 2em;
+        font-weight: 100;
+      }
+
+      header .title .text {
+        position: relative;
+        display: inline;
+        padding-left: 6px;
+        font-size: 1em;
+        font-weight: 200;
+      }
+
+      header .title .menu {
+        border: 1px solid #fff;
+        border-radius: 2px;
+        background: transparent;
+        color: #fff;
+        font-size: 0.4em;
+        vertical-align: middle;
+      }
+      header ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        clear: both;
+        display: inline-block;
+        font-size: 1em;
+      }
+
+      header ul li {
+        float: left;
+      }
+
+      header ul li:after {
+        content: "/";
+        color: #BBDEFB;
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+      }
+
+      header ul li:last-child:after {
+        content: none;
+        padding: 0;
+      }
+
+      header ul li a {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Sidebar Styling */
+      amp-sidebar {
+        padding: 15px;
+      }
+
+      amp-sidebar .close {
+        background: transparent;
+        border: 0;
+        font-size: 35px;
+        font-weight: 200;
+        line-height: 0.6;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 0 5px 1px;
+        margin: 5px 10px 0 0;
+      }
+
+      amp-sidebar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.1;
+      }
+
+      amp-sidebar a {
+        text-decoration: none;
+        color: #212121;
+      }
+
+      /** Grouping  **/
+      amp-sidebar > ul > li {
+        font-size: 0.9rem;
+        margin: 3px;
+        padding: 4px;
+      }
+
+      /** Product **/
+      amp-sidebar > ul > li > ul > li {
+        margin: 15px 7px 7px 7px;
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+
+      /** Section **/
+      amp-sidebar > ul > li > ul > li > ul > li {
+        margin: 10px;
+        font-size: 0.8rem;
+        font-weight: normal;
+        text-decoration: underline;
+      }
+
+      /* Main Content Styling */
+      section.content {
+        padding: 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="site-content site-width">
+      <header role="banner">
+        <div class="title">
+          <button class="menu" on="tap:sidebar.toggle">menu</button>
+          <h1 class="text">GCP Quickstarts</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/compute">Compute</a></li>
+            <li><a href="/storage_db">Storage and Databases</a></li>
+            <li><a href="/ml">Machine Learning</a></li>
+            <li><a href="/admininistrator">Administration</a></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="content" role="main">
+        <div>
+          <amp-img
+            width="917"
+            height="318px"
+            alt="cloud-logo"
+            layout="responsive"
+            src="/img/gcp.png"></app-img>
+        </div>
+
+        <h3>Get started with GCP</h3>
+        <p>
+          This is an open quickstart guide to Google Cloud Platform.
+          All the learnings contained on this webpage are 100% open and liscensed
+          under the gplv3. If you'd like to fix any typos or suggest an edit,
+          you can file an issue on <a href="example.com">github</a>, or
+          comment on the relavent google doc. At the top left of every quickstart
+          you'll see a button linking to a google doc. Simply add a comment on
+          the relavent content in the google doc, and we'll be sure to address
+          your issue.
+        </p>
+
+        <h3>Why an Open Guide?</h3>
+        <p>
+          Closed documentation fails to iterate and keep itself up to date. The
+          hope is that by being open we can foster a relationship with the GCP
+          community to make the best documents possible, through iteration. The
+          reason for choosing the GPLv3 is that we should all benefit by any improvements
+          made to this documentation.
+        </p>
+
+        <h3>How is this different than cloud.google.com?</h3>
+        <p>
+          All documentation on this page serves to act as introduction material to
+          Google Cloud Services. It aims to get you from nothing to having basic
+          services deployed. All the material assumes that the end user has
+          a basic understanding of the command line, and generic linux knowledge.
+        </p>
+
+        <h3>How can I Contribute</h3>
+        <p>
+          If you'd like to add content or become a major contributor simply post an
+          issue to the <a href="example.com">github</a> repo. Be sure to include
+          your Google Cloud subject
+          matter expertise.
+        </p>
+      </section>
+    </div>
+    <amp-sidebar id="sidebar" layout="nodisplay" side="left">
+      <button class="close" role="button" on="tap:sidebar.close">×</button>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/compute">Compute</a>
+          <ul>
+            <li><a href="/gce">Compute Engine</a>
+              <ul>
+                <li>Launching a VM</li>
+                <li>Instance Groups</li>
+                <li>Load Balancing</li>
+                <li>Persistant Disk</li>
+                <li>Premtible VMs</li>
+                <li>Networking and Security</li>
+                <li>Monitoring</li>
+              </ul>
+            </li>
+            <li><a href="/gke">Container Engine</a>
+              <ul>
+                <li>What is Kubernetes</li>
+                <li>Launching a Service</li>
+                <li>Using Secrets for Https</li>
+                <li>Managing a cluster</li>
+                <li>Monitoring</li>
+              </ul>
+            </li>
+            <li><a href="/appeng">App Engine</a>
+              <ul>
+                <li>What is AppEngine</li>
+                <li>Launching an application</li>
+                <li>Flex vs Standard Environment</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/storage_db">Storage and Databases</a>
+          <ul>
+            <li><a href="/datastore">Datastore</a>
+              <ul>
+                <li>Overview of NoSQL</li>
+                <li>Datastore Quickstart</li>
+                <li>Eventual Consistency</li>
+              </ul>
+            </li>
+            <li><a href="/bigtable">BigTable</a>
+              <ul>
+                <li>When to use BigTable</li>
+                <li>Performance Overview</li>
+                <li>Quickstart</li>
+              </ul>
+            </li>
+            <li><a href="/bigquery">BigQuery</a>
+              <ul>
+                <li>When to use BigQuery</li>
+                <li>Comparison of Competition</li>
+                <li>Best practices for warehousing data</li>
+                <li>Visualizing Data with Data Studio 360</li>
+                <li>Streaming Inserts</li>
+                <li>Loading in Data</li>
+              </ul>
+            </li>
+            <li><a href="/dataproc">DataProc</a>
+              <ul>
+                <li>What is Dataproc</li>
+                <li>Best Practices</li>
+              </ul>
+            </li>
+            <li><a href="/storage">Cloud Storage</a>
+              <ul>
+                <li>Different Tiers of Storage</li>
+                <li>Performance</li>
+                <li>Ways to Access Data</li>
+              </ul>
+            </li>
+            <li><a href="/pubsub">Pub/Sub</a>
+              <ul>
+                <li>Benefits of a Messaging Service</li>
+                <li>Push vs Pulling messages</li>
+                <li>Topics &amp; Subscriptions</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/ml">Machine Learning</a>
+          <ul>
+            <li>Managed APIs
+              <ul>
+                <li>Jobs API</li>
+                <li>Natural Language API</li>
+                <li>Speech API</li>
+                <li>Translation API</li>
+                <li>Vision API</li>
+              </ul>
+            </li>
+            <li>Unmanaged
+              <ul>
+                <li>Cloud Machine Learning</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/administration">Administration</a>
+          <ul>
+            <li>Security
+              <ul>
+                <li>Identity &amp; Access Magement (IAM)</li>
+                <li>Security Scanner</li>
+              </ul>
+            </li>
+            <li>Management
+              <ul>
+                <li>Deployment Manager</li>
+                <li>Cloud Shell</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </amp-sidebar>
+  </body>
+</html>

@@ -7,31 +7,31 @@
         "name": "Compute Engine",
         "acronym": "GCE",
         "sections": [
-          { "name": "Launching a VM" },
-          { "name": "Instance Groups" },
-          { "name": "Load Balancing" },
-          { "name": "Persistant Disk" },
-          { "name": "Preemtible VMs" },
-          { "name": "Networking and Security" },
-          { "name": "Monitoring" }
+          { "name": "Launching a VM", "claat": { "gdoc": "https://docs.google.com/document/d/1s6ElhALBm2fISBV_eWklqaG2Ayni8reIcquqwtjJdkU/edit#heading=h.7sa4zxkhmsum"}},
+          { "name": "Instance Groups" , "url": "/404.html" },
+          { "name": "Load Balancing" , "url": "/404.html" },
+          { "name": "Persistant Disk" , "url": "/404.html" },
+          { "name": "Preemtible VMs" , "url": "/404.html" },
+          { "name": "Networking and Security" , "url": "/404.html" },
+          { "name": "Monitoring", "url": "/404.html"  }
         ]
       }, {
         "name": "Container Engine",
         "acronym": "GAE",
         "sections": [
-          { "name": "What is Kubernetes" },
-          { "name": "Launching a Service" },
-          { "name": "Using Secrets Https & Service Accounts" },
-          { "name": "Managing a Cluster" },
-          { "name": "Monitoring" }
+          { "name": "What is Kubernetes" , "url": "/404.html" },
+          { "name": "Launching a Service" , "url": "/404.html" },
+          { "name": "Using Secrets Https & Service Accounts" , "url": "/404.html" },
+          { "name": "Managing a Cluster" , "url": "/404.html" },
+          { "name": "Monitoring", "url": "/404.html"  }
         ]
       }, {
         "name": "App Engine",
         "acronym": "GAE",
         "sections": [
-          { "name": "What is AppEngine" },
-          { "name": "Launching an Application" },
-          { "name": "Flex vs Standard Environment" }
+          { "name": "What is AppEngine" , "url": "/404.html" },
+          { "name": "Launching an Application" , "url": "/404.html" },
+          { "name": "Flex vs Standard Environment", "url": "/404.html"  }
         ]
       }
     ]
@@ -43,48 +43,48 @@
       {
         "name": "Datastore",
         "sections": [
-          { "name": "Overview of NoSQL" },
-          { "name": "Datastore Quickstart" },
-          { "name": "Eventual Consistency" }
+          { "name": "Overview of NoSQL" , "url": "/404.html" },
+          { "name": "Datastore Quickstart" , "url": "/404.html" },
+          { "name": "Eventual Consistency", "url": "/404.html"  }
         ]
       }, {
         "name": "BigTable",
         "acronym": "BT",
         "sections": [
-          { "name": "When to use BigTable" },
-          { "name": "Performance Overview" },
-          { "name": "Quickstart" }
+          { "name": "When to use BigTable" , "url": "/404.html" },
+          { "name": "Performance Overview" , "url": "/404.html" },
+          { "name": "Quickstart", "url": "/404.html"  }
         ]
       }, {
         "name": "BigQuery",
         "acronym": "BQ",
         "sections": [
-          { "name": "When to use BigQuery" },
-          { "name": "Comparison of Competition" },
-          { "name": "Best Practices" },
-          { "name": "Visualizing with Data Studio 360" },
-          { "name": "Loading Data" }
+          { "name": "When to use BigQuery" , "url": "/404.html" },
+          { "name": "Comparison of Competition" , "url": "/404.html" },
+          { "name": "Best Practices" , "url": "/404.html" },
+          { "name": "Visualizing with Data Studio 360" , "url": "/404.html" },
+          { "name": "Loading Data", "url": "/404.html"  }
         ]
       }, {
         "name": "DataProc",
         "sections": [
-          { "name": "What is Dataproc" },
-          { "name": "Best Practices" }
+          { "name": "What is Dataproc" , "url": "/404.html" },
+          { "name": "Best Practices", "url": "/404.html"  }
         ]
       }, {
         "name": "Cloud Storage",
         "acronym": "GCS",
         "sections": [
-          { "name": "Different Tiers of Storage" },
-          { "name": "Performance" },
-          { "name": "Ways to Access Data" }
+          { "name": "Different Tiers of Storage" , "url": "/404.html" },
+          { "name": "Performance" , "url": "/404.html" },
+          { "name": "Ways to Access Data", "url": "/404.html"  }
         ]
       }, {
         "name": "Pubsub",
         "sections": [
-          { "name": "Benefits of a Messaging Service" },
-          { "name": "Push vs Pulling Messages" },
-          { "name": "Topics & Subscriptions" }
+          { "name": "Benefits of a Messaging Service" , "url": "/404.html" },
+          { "name": "Push vs Pulling Messages" , "url": "/404.html" },
+          { "name": "Topics & Subscriptions", "url": "/404.html"  }
         ]
       }
     ]
@@ -97,17 +97,17 @@
         "name": "Cloud ML",
         "acronym": "ml",
         "sections": [
-          { "name": "Overview of Cloud ML"}
+          { "name": "Overview of Cloud ML", "url": "/404.html"}
         ]
       },
       {
         "name": "Machine Learning APIs",
         "sections": [
-          { "name": "Jobs API" },
-          { "name": "Natural Language API" },
-          { "name": "Speech API" },
-          { "name": "Translation API" },
-          { "name": "Vision API" }
+          { "name": "Jobs API" , "url": "/404.html" },
+          { "name": "Natural Language API" , "url": "/404.html" },
+          { "name": "Speech API" , "url": "/404.html" },
+          { "name": "Translation API" , "url": "/404.html" },
+          { "name": "Vision API", "url": "/404.html"  }
         ]
       }
     ]
@@ -118,16 +118,16 @@
       {
         "name": "Security",
         "sections": [
-          { "name": "Identity & Access Management (IAM)" },
-          { "name": "Security Scanner" },
-          { "name": "Virtual Private Networking (VPN)" },
-          { "name": "Firewalls" }
+          { "name": "Identity & Access Management (IAM)" , "url": "/404.html" },
+          { "name": "Security Scanner" , "url": "/404.html" },
+          { "name": "Virtual Private Networking (VPN)" , "url": "/404.html" },
+          { "name": "Firewalls", "url": "/404.html"  }
         ]
       }, {
         "name": "Management",
         "sections": [
-          { "name": "Deployment Manager" },
-          { "name": "Cloud Shell" }
+          { "name": "Deployment Manager" , "url": "/404.html" },
+          { "name": "Cloud Shell", "url": "/404.html"  }
         ]
       }
     ]

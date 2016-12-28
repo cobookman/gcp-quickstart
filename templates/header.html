@@ -8,7 +8,7 @@
     <ul>
       {{ range $grouping := . }}
         {{ if $grouping.LinkInHeader }}
-          <li><a href="{{$grouping.URL}}">{{$grouping.Name}}</a></li>
+          <li><a href="{{$grouping.Path}}">{{$grouping.Name}}</a></li>
         {{ end }}
       {{ end }}
     </ul>

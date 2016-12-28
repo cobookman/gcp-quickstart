@@ -9,9 +9,15 @@ import (
 	"time"
 )
 
+
+type Claat struct {
+	Gdoc      string `json:"gdoc"`
+}
+
 type Section struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
+	Claat *Claat `json:"claat"`
 }
 
 type Product struct {
@@ -25,14 +31,7 @@ type Grouping struct {
 	Name         string     `json:"name"`
 	LinkInHeader bool       `json:"linkInHeader"`
 	Products     []*Product `json:"products"`
-	URL          string     `json:"url"`
-}
-
-type Source struct {
-	GdocURL      string `json:"gdocUrl"`
-	IsClaat      bool   `json:"isClaat"`
-	IsFreeForm   bool   `json:"isFreeForm"`
-	RenderedHTML template.HTML
+	Path          string     `json:"url"`
 }
 
 type Social struct {
@@ -43,64 +42,108 @@ type Social struct {
 	Image         []string  `json:"iamge"`
 }
 
-type Layout struct {
+type Page struct {
 	ContentList []*Grouping
-	Source      Source
 	Title       string
 	DomainRoot  string
-	FilePath    string
+	PagePath    string
 	Social      Social
+	RenderedHTML template.HTML
 }
+
+var (
+	GoogleAnalytics = "UA-88560603-1"
+)
 
 func main() {
 	setup()
 
 	templates := template.Must(template.ParseGlob("templates/*"))
 
-	layout, err := GetLayout()
+	page, err := GetBasePage()
 	if err != nil {
 		log.Fatal(err)
 	}
 
+
+	page.RenderSupportingContent()
+
+	// Render a grouping page for nav & SEO
+	for _, grouping := range page.ContentList {
+		if err := os.MkdirAll("build/" + grouping.Path, 0777); err != nil {
+			log.Fatal(err)
+		}
+
+		log.Printf("Rending grouping page: %s", grouping.Path)
+		if err := RenderMiddleware(*page, templates, grouping.Path + "/index.html", RenderGrouping); err != nil {
+			log.Fatal(err)
+		}
+	}
+
 	// Render index page
-	if err := RenderMiddleware(*layout, templates, "/index.html", RenderIndex); err != nil {
+	if err := RenderMiddleware(*page, templates, "/index.html", RenderIndex); err != nil {
 		log.Fatal(err)
 	}
 }
 
-func GetLayout() (*Layout, error) {
+func (page *Page) RenderSupportingContent() {
+	// Render any claats
+	for _, grouping := range page.ContentList {
+		for _, product := range grouping.Products {
+			for _, section := range product.Sections {
+				if len(section.URL) == 0 {
+					if section.Claat != nil {
+						log.Printf("Rendering claat for: %s -> %s -> %s\n",
+							grouping.Name, product.Name, section.Name)
+						buildPath := "build/" + grouping.Name + "/" + product.Name + "/" + section.Name
+						section.URL = page.DomainRoot + "/" + buildPath + "/index.html"
+						if err := renderClaat(section.Claat.Gdoc, buildPath, GoogleAnalytics); err != nil {
+							log.Fatal(err)
+						}
+					} else {
+						log.Fatalf("%s -> %s -> %s section does not have a url or claat\n",
+							grouping.Name, product.Name, section.Name)
+					}
+				}
+			}
+		}
+	}
+}
+
+
+func GetBasePage() (*Page, error) {
 	data, err := ioutil.ReadFile("layout.json")
 	if err != nil {
 		return nil, err
 	}
 
-	layout := &Layout{}
-	if err := json.Unmarshal(data, &layout.ContentList); err != nil {
+	basePage := &Page{}
+	if err := json.Unmarshal(data, &basePage.ContentList); err != nil {
 		return nil, err
 	}
 
 	// Attach defaults
-	layout.Social.Context = "http://schema.org"
-	layout.Social.Type = "NewsArticle"
-	layout.DomainRoot = "http://localhost:8000"
+	basePage.Social.Context = "http://schema.org"
+	basePage.Social.Type = "NewsArticle"
+	basePage.DomainRoot = "http://localhost:8000"
 
-	// Generate relevant URLs
-	for _, grouping := range layout.ContentList {
-		grouping.URL = layout.DomainRoot + "/lessons/" + grouping.Name + ".html"
+
+	// Generate unique URLs for each grouping, and unique IDs for products
+	for _, grouping := range basePage.ContentList {
+		if len(grouping.Path) == 0 {
+			grouping.Path = "/" + grouping.Name
+		}
 		for _, product := range grouping.Products {
 			if len(product.Acronym) != 0 {
 				product.ID = product.Acronym
 			} else {
 				product.ID = product.Name
 			}
-
-			for _, section := range product.Sections {
-				section.URL = layout.DomainRoot + "/lessons/" + grouping.Name + "/" + product.Name + "/" + section.Name + ".html"
-			}
 		}
 	}
 
-	return layout, nil
+
+	return basePage, nil
 }
 
 func setup() error {
@@ -119,14 +162,14 @@ func setup() error {
 	return nil
 }
 
-type RenderFn func(Layout, *template.Template, *os.File) error
+type RenderFn func(Page, *template.Template, *os.File) error
 
-func RenderMiddleware(layout Layout, templates *template.Template, filePath string, renderFn RenderFn) error {
-	f, err := os.Create("build" + filePath)
+func RenderMiddleware(basePage Page, templates *template.Template, filePath string, renderFn RenderFn) error {
+	f, err := os.Create("build/" + filePath)
 	if err != nil {
 		return err
 	}
 
-	layout.FilePath = filePath
-	return renderFn(layout, templates, f)
+	basePage.PagePath = filePath
+	return renderFn(basePage, templates, f)
 }

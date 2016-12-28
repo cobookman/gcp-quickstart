@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <title>{{.Title}}</title>
-    <link rel="canonical" href="{{.DomainRoot}}{{.FilePath}}" />
+    <link rel="canonical" href="{{.DomainRoot}}/{{.PagePath}}" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
       {{.Social}}
@@ -21,7 +21,7 @@
       {{ template "header" .ContentList }}
 
       <section class="content" role="main">
-        {{ .Source.RenderedHTML }}
+        {{ .RenderedHTML }}
       </section>
     </div>
     {{ template "side-bar" .ContentList }}

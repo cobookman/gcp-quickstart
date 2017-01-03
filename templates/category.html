@@ -1,0 +1,34 @@
+{{ define "category" }}
+
+<h1 id="{{.ID}}">{{.Name}}</h1>
+<p>{{.Summary}}</p>
+
+{{ range $product := .Products }}
+<section class="product">
+
+  <h3 id="{{$product.ID}}">
+    <div style="height:3em; width:3em;display:inline-block;vertical-align:middle">
+      <amp-img height="3em" width="3em" src="{{$product.Icon}}"></amp-img>
+    </div>
+    <span style="position: relative; top: 2px;">
+      {{$product.Name}}
+      {{ if $product.Acronym }}
+        <span class="acronym" style="color: #757575;">({{$product.Acronym}})</span>
+      {{ end }}
+    </span>
+  </h3>
+  <p>{{$product.Summary}}</p>
+
+
+  <ul class="lessons">
+  {{ range $lesson := $product.Lessons}}
+    <li>
+      <h4><a href="{{$lesson.Href}}">{{$lesson.Name}}</a></h4>
+      <p>{{$lesson.Summary}}</p>
+    </li>
+  {{ end }}
+  </ul>
+<section>
+{{ end }}
+
+{{ end}}

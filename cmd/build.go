@@ -57,7 +57,14 @@ func buildOthers(clientSecretPath string, layout *layout.Layout) error {
   color.Blue("Building Other Pages")
   for _, other := range layout.Others {
     color.Magenta("\tBuilding Other: " + other.URL)
-    renders.RenderGdoc(clientSecretPath, other.SourceGDoc, "build", other.URL)
+    metadata, htmlBody , err := renders.RenderGdoc(clientSecretPath, other.SourceGDoc, "build", other.URL)
+    if err != nil {
+      return err
+    }
+    
+    fmt.Printf("\t\tTitle: %s\n\t\tSummary: %s\n\t\tAuthor: %s\n\t\tImage: %s\n",
+      metadata.Title, metadata.Summary, metadata.Author, metadata.Image)
+    fmt.Printf("\t\tHtmlBody: %s\n", htmlBody)
   }
   return nil
 }

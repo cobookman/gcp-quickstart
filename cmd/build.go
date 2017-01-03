@@ -2,6 +2,8 @@ package cmd
 
 import (
   "log"
+  "os/exec"
+  "os"
   "fmt"
   "github.com/spf13/cobra"
   "github.com/cobookman/gcp-quickstart/layout"
@@ -12,6 +14,7 @@ import (
 var layoutSheetId string
 var clientSecretPath string
 var isClean bool
+var domain string
 
 var buildCmd = &cobra.Command{
 	Use: "build",
@@ -26,11 +29,18 @@ func init() {
   buildCmd.Flags().BoolVarP(&isClean, "clean", "c", false, "Clean before buliding")
   buildCmd.Flags().StringVarP(&layoutSheetId, "layout-sheet-id", "l", "1-Nj5UkRGfD-9N6zj3B7mYXrJFvOgxmzm3RXv2cLeAh4", "Id of the google sheet containing the layout")
   buildCmd.Flags().StringVarP(&clientSecretPath, "client_secret", "s", "client_secret.json", "path to the oauth client secret")
+  buildCmd.Flags().StringVarP(&domain, "domain", "d", "https://example.com", "root domain url. used in cononical metadata")
 }
 
 func Build() {
   if isClean {
     Clean()
+  }
+
+  color.Red("Copying Images")
+  os.MkdirAll("build/img", os.ModePerm)
+  if err := exec.Command("cp", "-r", "img/", "build").Run(); err != nil {
+    log.Fatal(err)
   }
 
   color.Red("Getting Layout")
@@ -57,14 +67,13 @@ func buildOthers(clientSecretPath string, layout *layout.Layout) error {
   color.Blue("Building Other Pages")
   for _, other := range layout.Others {
     color.Magenta("\tBuilding Other: " + other.URL)
-    gr , err := renders.RenderGdoc(clientSecretPath, other.SourceGDoc, "build", other.URL)
+    gr , err := renders.RenderGdoc(layout, clientSecretPath, other.SourceGDoc, "build", other.URL, domain)
     if err != nil {
       return err
     }
 
     fmt.Printf("\t\tTitle: %s\n\t\tSummary: %s\n\t\tAuthor: %s\n\t\tImage: %s\n",
       gr.Metadata.Title, gr.Metadata.Summary, gr.Metadata.Author, gr.Metadata.Image)
-    fmt.Printf("\t\tHtmlBody: %s\n", gr.ArticleHTML)
   }
   return nil
 }
@@ -73,9 +82,10 @@ func buildCategories(layout *layout.Layout) error {
   color.Blue("Building Category Pages")
   for _, category := range layout.Categories {
     color.Magenta("\tBuilding Category: " + category.Name)
-    for _, product := range category.Products {
-      fmt.Println("\t\tProduct: " + product.Name)
+    if err := renders.RenderCategory(layout, category, "build", domain); err != nil {
+      return err
     }
+    fmt.Println("\t\tBuilt")
   }
   return nil
 }

@@ -3,6 +3,7 @@ package layout
 import (
   "log"
   "strings"
+  "fmt"
   "github.com/cobookman/gcp-quickstart/apiclients"
 )
 
@@ -13,13 +14,16 @@ type Lesson struct {
   SourceURL string
   SourceClaat string
   SourceGDoc string
+  Href string
 }
 
 type Product struct {
   Category *Category
   ID string
   Name string
+  Acronym string
   Summary string
+  Icon string
   Lessons []*Lesson
 }
 
@@ -81,7 +85,7 @@ func GetLayout(clientSecretPath string, spreadsheetId string) (*Layout, error) {
   }
 
   // Populate products
-  productColumns := "Products!A2:E"
+  productColumns := "Products!A2:F"
   productResp, err := srv.Spreadsheets.Values.Get(spreadsheetId, productColumns).Do()
   if err != nil {
     return nil, err
@@ -94,7 +98,9 @@ func GetLayout(clientSecretPath string, spreadsheetId string) (*Layout, error) {
     product := &Product{
       ID: assert(row[1].(string)),
       Name: assert(row[2].(string)),
-      Summary: row[3].(string),
+      Acronym: row[3].(string),
+      Summary: row[4].(string),
+      Icon: row[5].(string),
     }
 
     // Attach Product's category
@@ -124,6 +130,14 @@ func GetLayout(clientSecretPath string, spreadsheetId string) (*Layout, error) {
       SourceURL: row[3].(string),
       SourceClaat: row[4].(string),
       SourceGDoc: row[5].(string),
+    }
+
+    // populate lesson's href
+    if len(lesson.SourceURL) != 0 {
+      lesson.Href = lesson.SourceURL
+    } else if len(lesson.SourceClaat) != 0 || len(lesson.SourceGDoc) != 0 {
+      lesson.Href = fmt.Sprintf("/%s/%s/%s/index.html",
+        lesson.Product.Category.ID, lesson.Product.ID, lesson.Name)
     }
 
     // Attach lesson's product

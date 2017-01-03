@@ -6,9 +6,9 @@
   </div>
   <nav>
     <ul>
-      {{ range $grouping := . }}
-        {{ if $grouping.LinkInHeader }}
-          <li><a href="{{$grouping.Path}}">{{$grouping.Name}}</a></li>
+      {{ range $category := .Categories }}
+        {{ if $category.InHeader }}
+          <li><a href="/{{$category.ID}}">{{$category.Name}}</a></li>
         {{ end }}
       {{ end }}
     </ul>

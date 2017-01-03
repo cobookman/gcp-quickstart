@@ -2,6 +2,9 @@ package cmd
 
 import (
   "log"
+  "os"
+  "github.com/fatih/color"
+
   "github.com/spf13/cobra"
 )
 
@@ -15,5 +18,13 @@ var cleanCmd = &cobra.Command{
 }
 
 func Clean() {
-  log.Print("Clean...")
+  color.Red("Cleaning Build")
+  if err := os.RemoveAll("build/"); err != nil {
+    log.Fatal(err)
+  }
+
+  color.Red("Cleaning Scratch")
+  if err := os.RemoveAll("scratch/"); err != nil {
+    log.Fatal(err)
+  }
 }

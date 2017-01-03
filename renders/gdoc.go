@@ -9,10 +9,12 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-
+	"time"
 	"errors"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/cobookman/gcp-quickstart/apiclients"
+	"github.com/cobookman/gcp-quickstart/layout"
+	"github.com/cobookman/gcp-quickstart/templates"
 	"github.com/satori/go.uuid"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
@@ -40,15 +42,19 @@ type GdocRender struct {
 	Source      string
 	Path        string
 	BuildFolder string
+	Domain 		 	string
+	Layout *layout.Layout
 }
 
 // Grabs the contents from a gdoc, downloads all images to the build folder.
 // fixes some html issues, and pases up any errors
-func RenderGdoc(clientSecretPath string, gdocURL string, buildFolder string, htmlPath string) (*GdocRender, error) {
+func RenderGdoc(layout *layout.Layout, clientSecretPath string, gdocURL string, buildFolder string, htmlPath string, domain string) (*GdocRender, error) {
 	gr := &GdocRender{
 		Source:      gdocURL,
 		Path:        htmlPath,
 		BuildFolder: buildFolder,
+		Domain: domain,
+		Layout: layout,
 	}
 
 	resp, err := apiclients.GetGdocHtml(clientSecretPath, gr.ID())
@@ -71,7 +77,29 @@ func RenderGdoc(clientSecretPath string, gdocURL string, buildFolder string, htm
 		return nil, err
 	}
 
+	if err = gr.write(); err != nil {
+		return nil, err
+	}
+
 	return gr, err
+}
+
+// Writes the article out
+func (gr GdocRender) write() error {
+	pg := &templates.PageMetadata{
+		Title: gr.Metadata.Title,
+		ArticleHTML: templates.RenderHTML(gr.ArticleHTML),
+		FilePath: gr.Path,
+		Domain: gr.Domain,
+		Social: &templates.Social{
+			Headline: gr.Metadata.Title,
+			DatePublished: time.Now(),
+			Image: []string{gr.Metadata.Image},
+		},
+		Layout: gr.Layout,
+	}
+
+	return templates.RenderPage(pg, gr.BuildFolder)
 }
 
 // Gives the gdoc's ID from parsing source url.

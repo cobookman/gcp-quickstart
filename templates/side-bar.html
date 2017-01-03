@@ -4,21 +4,21 @@
   <button class="close" role="button" on="tap:sidebar.close">×</button>
   <ul>
     <li><a href="/">Home</a></li>
-    {{ range $grouping := . }}
+    {{ range $category := .Categories }}
     <li>
-      <a href="{{$grouping.Path}}">{{$grouping.Name}}</a>
+      <a href="/{{$category.ID}}">{{$category.Name}}</a>
       <ul>
-        {{ range $product := $grouping.Products }}
+        {{ range $product := $category.Products }}
         <li>
-          <a href="{{$grouping.Path}}#{{$product.ID}}">
+          <a href="/{{$category.ID}}#{{$product.ID}}">
             {{$product.Name}}
             {{ if $product.Acronym }}
               ({{$product.Acronym}})
             {{end}}
           </a>
           <ul>
-          {{ range $section := $product.Sections }}
-            <li><a href="{{$section.URL}}">{{$section.Name}}</a></li>
+          {{ range $lesson := $product.Lessons }}
+            <li><a href="{{$lesson.Href}}">{{$lesson.Name}}</a></li>
           {{ end }}
           </ul>
         </li>

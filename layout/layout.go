@@ -132,22 +132,21 @@ func GetLayout(clientSecretPath string, spreadsheetId string) (*Layout, error) {
       SourceGDoc: row[5].(string),
     }
 
+    // Attach lesson's product
+    lessonProduct := products[row[0].(string)]
+    lesson.Product = lessonProduct
+
     // populate lesson's href
     if len(lesson.SourceURL) != 0 {
       lesson.Href = lesson.SourceURL
     } else if len(lesson.SourceClaat) != 0 || len(lesson.SourceGDoc) != 0 {
       lesson.Href = fmt.Sprintf("/%s/%s/%s/index.html",
-        lesson.Product.Category.ID, lesson.Product.ID, lesson.Name)
+      lesson.Product.Category.ID, lesson.Product.ID, lesson.Name)
     }
-
-    // Attach lesson's product
-    lessonProduct := products[row[0].(string)]
-    lesson.Product = lessonProduct
 
     // Store lesson
     lessonProduct.Lessons = append(lessonProduct.Lessons, lesson)
     layout.Lessons = append(layout.Lessons, lesson)
-
   }
 
   otherColumns := "Others!A2:B"

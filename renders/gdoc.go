@@ -185,7 +185,7 @@ func (gr GdocRender) downloadImage(imageUrl string) (string, *image.Rectangle, e
 	}
 
 	// Save image to build folder
-	if err := os.MkdirAll(gr.BuildFolder+"/img/", 0777); err != nil {
+	if err := os.MkdirAll(gr.BuildFolder+"/img/", os.ModePerm); err != nil {
 		return "", nil, err
 	}
 	f, err := os.Create(gr.BuildFolder + fname)

@@ -1,0 +1,13 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": "build",
+    "redirects": [{
+        "source": "/",
+        "destination": "/index.html",
+        "type": "301"
+    }]
+  }
+}

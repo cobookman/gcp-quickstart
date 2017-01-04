@@ -3,6 +3,9 @@ package cmd
 import (
   "log"
   "github.com/spf13/cobra"
+  "os/exec"
+  "os"
+  "github.com/fatih/color"
 )
 
 var uploadCmd = &cobra.Command{
@@ -17,5 +20,14 @@ var uploadCmd = &cobra.Command{
 
 
 func Upload() {
-  log.Print("Upload...")
+  color.Red("Uploading Build")
+  deployCmd := exec.Command("firebase", "deploy")
+  deployCmd.Stdout = os.Stdout
+  deployCmd.Stderr = os.Stderr
+  if err := deployCmd.Start(); err != nil {
+    log.Fatal(err)
+  }
+  if err := deployCmd.Wait(); err != nil {
+    log.Fatal(err)
+  }
 }

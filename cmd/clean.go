@@ -22,9 +22,4 @@ func Clean() {
   if err := os.RemoveAll("build/"); err != nil {
     log.Fatal(err)
   }
-
-  color.Red("Cleaning Scratch")
-  if err := os.RemoveAll("scratch/"); err != nil {
-    log.Fatal(err)
-  }
 }

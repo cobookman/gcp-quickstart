@@ -15,6 +15,7 @@ var layoutSheetId string
 var clientSecretPath string
 var isClean bool
 var domain string
+var gaID string
 
 var buildCmd = &cobra.Command{
 	Use: "build",
@@ -30,6 +31,7 @@ func init() {
   buildCmd.Flags().StringVarP(&layoutSheetId, "layout-sheet-id", "l", "1-Nj5UkRGfD-9N6zj3B7mYXrJFvOgxmzm3RXv2cLeAh4", "Id of the google sheet containing the layout")
   buildCmd.Flags().StringVarP(&clientSecretPath, "client_secret", "s", "client_secret.json", "path to the oauth client secret")
   buildCmd.Flags().StringVarP(&domain, "domain", "d", "https://example.com", "root domain url. used in cononical metadata")
+  buildCmd.Flags().StringVarP(&gaID, "ga", "g", "", "Google Analytics ID")
 }
 
 func Build() {
@@ -37,9 +39,9 @@ func Build() {
     Clean()
   }
 
-  color.Red("Copying Images")
-  os.MkdirAll("build/img", os.ModePerm)
-  if err := exec.Command("cp", "-r", "img/", "build").Run(); err != nil {
+  color.Red("Copying Statics")
+  os.MkdirAll("build/statics/", os.ModePerm)
+  if err := exec.Command("cp", "-r", "statics/", "build/").Run(); err != nil {
     log.Fatal(err)
   }
 
@@ -94,12 +96,18 @@ func buildLessons(layout *layout.Layout) error {
   color.Blue("Building Lesson Pages")
   for _, lesson := range layout.Lessons {
     color.Magenta("\tBuilding lesson: " + lesson.Name)
+
     if len(lesson.SourceClaat) != 0 {
-      fmt.Println("\t\tBuilding claat")
+      color.Cyan("\t\tBuilding claat")
+      if err := renders.RenderClaat(lesson, gaID, "build"); err != nil {
+        return err
+      }
     } else if len(lesson.SourceGDoc) != 0 {
       fmt.Println("\t\tBuilding Gdoc")
+
     } else if len(lesson.SourceURL) != 0 {
       fmt.Println("\t\tUsing Source URL")
+
     } else {
       color.Red("\t\tLesson has no source, skipping")
     }

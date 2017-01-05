@@ -28,7 +28,7 @@ func RenderClaat(lesson *layout.Lesson, ga string, buildFolder string) error {
 	}()
 
 	// Render Claat
-	claatCmd := exec.Command("./claat",
+	claatCmd := exec.Command("claat",
 		"export",
     "-prefix", "/",
 		"-f", "html",

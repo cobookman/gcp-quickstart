@@ -2,6 +2,8 @@ package cmd
 
 import (
   "log"
+  "os"
+  "os/exec"
   "github.com/spf13/cobra"
 )
 
@@ -17,5 +19,15 @@ var uploadCmd = &cobra.Command{
 
 
 func Upload() {
-  log.Print("Upload...")
+  log.Print("Uploading")
+  uploadCmd := exec.Command("firebase", "deploy")
+	uploadCmd.Stdout = os.Stdout
+	uploadCmd.Stderr = os.Stderr
+	if err := uploadCmd.Start(); err != nil {
+		log.Fatal(err)
+	}
+	if err := uploadCmd.Wait(); err != nil {
+		log.Fatal(err)
+	}
+
 }
